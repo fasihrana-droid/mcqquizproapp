@@ -1,0 +1,6 @@
+{
+  "name": "MCQQUIZ",
+  "description": "Exam & Mock Simulator with Test Studio, Question Bank, Saved MCQs, JSON/CSV Upload Center, and Analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

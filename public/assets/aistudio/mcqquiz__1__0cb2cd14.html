@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MCQQUIZ – Exam & Mock Simulator</title>
+<style>
+:root{--bg:#0a1020;--card:#111b33;--in:#0c1327;--bd:#1f2c4a;--tx:#f1f5f9;--mu:#8b9ab5;--g:#10b981;--g2:#34d399;--o:#f59e0b;--r:#f87171;--b:#38bdf8;color-scheme:dark}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:90px}
+.w{max-width:560px;margin:0 auto;padding:0 16px}
+header{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--bd);max-width:560px;margin:auto}
+.logo{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#10b981,#059669);display:grid;place-items:center;font-size:24px}
+header b{font-size:22px;letter-spacing:-.5px}.pro{font-size:11px;background:#0d3b2e;color:var(--g2);border:1px solid #14604a;padding:1px 8px;border-radius:6px;margin-left:6px}
+header small{display:block;color:var(--mu);font-size:13px}
+h1{font-size:28px;letter-spacing:-.8px;margin:18px 0 12px}h2{font-size:19px}
+p.m,.m{color:var(--mu);font-size:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:16px;margin:14px 0}
+.btn{border:1px solid var(--bd);background:var(--in);color:var(--tx);border-radius:14px;padding:12px 14px;font:600 15px inherit;font-family:inherit;cursor:pointer}
+.btn.g{background:var(--g);border-color:var(--g);color:#04130d}.btn.o{background:var(--o);border-color:var(--o);color:#1a1000}
+.btn.r{color:var(--r)}.btn.s{padding:6px 10px;font-size:13px;border-radius:10px}.btn[disabled]{opacity:.4}
+.row{display:flex;gap:10px;align-items:center}.row>*{flex:1}.sb{justify-content:space-between}.row .n{flex:none}
+.chip{display:inline-block;border:1px solid var(--bd);background:var(--in);border-radius:999px;padding:8px 16px;margin:4px 6px 4px 0;cursor:pointer;font-size:14px}
+.chip.on{border-color:var(--g);color:var(--g2);background:#0d2b24}
+input[type=text],input[type=number],textarea{width:100%;background:var(--in);border:1px solid var(--bd);border-radius:14px;color:var(--tx);padding:12px;font:inherit}
+input[type=checkbox]{width:24px;height:24px;accent-color:var(--g);flex:none}
+input[type=range]{width:100%;accent-color:var(--g)}
+.opt{display:flex;gap:12px;align-items:center;border:1px solid var(--bd);background:var(--in);border-radius:14px;padding:12px;margin:8px 0;cursor:pointer;text-align:left;width:100%;color:var(--tx);font:inherit}
+.opt i{font-style:normal;background:#16223d;border-radius:8px;width:32px;height:32px;display:grid;place-items:center;font-weight:700;flex:none}
+.opt.sel{border-color:var(--g);background:#0d2b24}.opt.ok{border-color:var(--g);background:#0d3b2e;color:var(--g2)}.opt.bad{border-color:var(--r);background:#3a1620;color:var(--r)}
+.tag{display:inline-block;font-size:12px;font-weight:600;border-radius:8px;padding:4px 10px;margin-right:6px}
+.t-s{background:#0f2f3a;color:var(--b)}.t-Easy{background:#0d3b2e;color:var(--g2)}.t-Medium{background:#3a2a12;color:var(--o)}.t-Hard{background:#3a1620;color:var(--r)}
+.exp{background:var(--in);border:1px solid var(--bd);border-radius:14px;padding:12px;margin-top:10px;font-size:14px;color:var(--mu)}
+nav{position:fixed;bottom:0;left:0;right:0;background:#0a1020;border-top:1px solid var(--bd);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0)}
+nav div{display:flex;max-width:560px;width:100%}
+nav button{flex:1;background:none;border:0;color:var(--mu);padding:8px 0;font:12px inherit;font-family:inherit;cursor:pointer}
+nav button span{display:block;font-size:20px;margin:0 auto 2px;width:56px;border-radius:16px;padding:4px 0}
+nav button.on{color:var(--g2)}nav button.on span{background:#0d2b24}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stats div{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:12px 4px;text-align:center;font-size:12px;color:var(--mu)}.stats b{display:block;font-size:20px;margin-bottom:2px}
+.bar{height:10px;background:var(--card);border-radius:9px;overflow:hidden}.bar div{height:100%;background:var(--g)}
+.pal{display:flex;flex-wrap:wrap;gap:8px}.pal button{width:44px;height:44px;border-radius:12px;border:1px solid var(--bd);background:var(--in);color:var(--mu);font-weight:600;cursor:pointer}
+.pal .a{background:#0d3b2e;color:var(--g2);border-color:var(--g)}.pal .cur{outline:2px solid #fff}.pal .sv{box-shadow:inset 0 -4px var(--o)}
+.pill{padding:6px 12px;border-radius:10px;font-weight:700;font-size:14px;border:1px solid}.pass{background:#0d3b2e;color:var(--g2);border-color:#14604a}.fail{background:#3a1620;color:var(--r);border-color:#6b2433}
+.sc{font-size:56px;font-weight:800;text-align:center;letter-spacing:-2px}
+.hide{display:none}.cb{display:flex;gap:12px;align-items:center;margin:10px 0}
+.sum div{display:flex;justify-content:space-between;padding:5px 0;color:var(--mu)}.sum b{color:var(--tx)}
+</style>
+</head>
+<body>
+<header><div class="logo">⚡</div><div><b>MCQQUIZ</b><span class="pro">PRO</span><small>Exam & Mock Simulator</small></div></header>
+<main class="w" id="app"></main>
+<nav id="nav"><div></div></nav>
+<input type="file" id="file" class="hide" accept=".json,.csv">
+<script>
+const $=s=>document.querySelector(s),e=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let mem={};
+const ld=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):(mem[k]??d)}catch(_){return mem[k]??d}};
+const sv=(k,v)=>{mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(_){}};
+const uid=()=>'q'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const shuf=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const SAMPLE=[
+["Medium","What is Pakistan's recent $7 billion IMF loan package (approved in September 2024) officially called?",["Stand-By Arrangement (SBA)","Extended Fund Facility (EFF)","Rapid Financing Instrument (RFI)","Poverty Reduction and Growth Facility (PRGF)"],1,"In September 2024 the IMF Executive Board approved a 37-month Extended Fund Facility for Pakistan."],
+["Medium","Who presented the Lahore Resolution in 1940?",["Allama Iqbal","A.K. Fazlul Huq","Liaquat Ali Khan","Chaudhry Rahmat Ali"],1,"A.K. Fazlul Huq (Sher-e-Bengal) moved the resolution on 23 March 1940."],
+["Easy","Who is the founder of Pakistan?",["Allama Iqbal","Liaquat Ali Khan","Muhammad Ali Jinnah","Sir Syed Ahmad Khan"],2,"Quaid-e-Azam Muhammad Ali Jinnah founded Pakistan."],
+["Easy","What was the capital of Pakistan before Islamabad?",["Lahore","Karachi","Rawalpindi","Peshawar"],1,"Karachi was the first capital; Rawalpindi served temporarily before Islamabad."],
+["Medium","In which year did Pakistan become an Islamic Republic with its first constitution?",["1947","1950","1956","1962"],2,"The 1956 constitution declared Pakistan an Islamic Republic on 23 March 1956."],
+["Easy","Which is the longest river of Pakistan?",["Jhelum","Indus","Ravi","Sutlej"],1,"The Indus is the longest river, flowing about 3,180 km."],
+["Easy","K2, in Pakistan, is the world's ___ highest mountain.",["First","Second","Third","Fourth"],1,"K2 (8,611 m) is second only to Mount Everest."],
+["Medium","The Objectives Resolution was passed in which year?",["1947","1949","1951","1956"],1,"The Constituent Assembly passed it on 12 March 1949."],
+["Hard","The Khyber Pass connects Pakistan with which country?",["Iran","China","Afghanistan","India"],2,"The Khyber Pass links Peshawar (KP) to Jalalabad in Afghanistan."],
+["Easy","What is the national language of Pakistan?",["Punjabi","Urdu","Sindhi","Pashto"],1,"Urdu is the national language; English and Urdu are official."]
+];
+const mk=(s,r)=>({id:uid(),subject:s,difficulty:r[0],question:r[1],options:r[2],correct_index:r[3],explanation:r[4]});
+let S={bank:ld('bank',null),saved:ld('saved',[]),hist:ld('hist',[]),tab:'studio',
+ st:{sel:null,title:'',mode:'study',diff:'All',neg:0,pass:33,zero:false,shuf:false,rnd:true,n:10,t:20},qz:null,res:null,q:'',qs:'All',qd:'All'};
+if(!S.bank){S.bank=SAMPLE.map(r=>mk('Pak Studies',r));sv('bank',S.bank)}
+const subjects=()=>[...new Set(S.bank.map(q=>q.subject))];
+const byId=id=>S.bank.find(q=>q.id==id);
+const save=()=>{sv('bank',S.bank);sv('saved',S.saved);sv('hist',S.hist)};
+const TABS=[['studio','⚡','Test Studio'],['bank','📖','Question Bank'],['saved','🔖','Saved'],['upload','☁️','Upload'],['stats','📊','Analytics']];
+function go(t){S.tab=t;S.res=null;if(S.qz&&S.qz.tm){clearInterval(S.qz.tm)}S.qz=null;draw()}
+function draw(){
+ $('#nav div').innerHTML=TABS.map(t=>`<button class="${S.tab==t[0]&&!S.qz?'on':''}" onclick="go('${t[0]}')"><span>${t[1]}</span>${t[2]}</button>`).join('');
+ $('#app').innerHTML=S.qz?vQuiz():S.res?vRes():({studio:vStudio,bank:vBank,saved:vSaved,upload:vUpload,stats:vStats})[S.tab]();
+ window.scrollTo(0,0);
+}
+/* ---------- TEST STUDIO ---------- */
+function ensureSel(){const sj=subjects();if(!S.st.sel)S.st.sel={};sj.forEach(s=>{if(!S.st.sel[s])S.st.sel[s]={on:true,v:''}})}
+function parseV(v,len){v=String(v).trim();if(!v)return[0,len];let m=v.match(/^(\d+)\s*-\s*(\d+)$/);if(m)return[Math.max(0,m[1]-1),Math.min(len,+m[2])];if(/^\d+$/.test(v))return[0,Math.min(len,+v)];return[0,len]}
+function pool(){ensureSel();const s=S.st;let out=[];subjects().forEach(sj=>{if(!s.sel[sj].on)return;let l=S.bank.filter(q=>q.subject==sj&&(s.diff=='All'||q.difficulty==s.diff));const[a,b]=parseV(s.sel[sj].v,l.length);out=out.concat(l.slice(a,b))});return out}
+function vStudio(){ensureSel();const s=S.st,P=pool(),mx=Math.max(1,P.length);if(s.n>mx)s.n=mx;
+ return `<h1>Test Studio & Mock Simulator</h1>
+ <div class="row"><button class="btn o" style="padding:20px 8px" onclick="blitz()">⚡ 10-MCQ Rapid Blitz</button><button class="btn g" style="padding:20px 8px" onclick="s_full()">▶ Full Mock Exam</button></div>
+ <p class="m" style="margin:14px 0">Select specific subjects or launch instant full mocks with strict timer, negative marking, and instant solution reviews.</p>
+ <div class="m" style="margin:18px 0 6px;font-weight:600">AVAILABLE SUBJECTS</div>${subjects().map(x=>`<span class="chip" onclick="drill('${e(x)}')">${e(x)} (${S.bank.filter(q=>q.subject==x).length})</span>`).join('')||'<p class="m">No questions yet. Upload some.</p>'}
+ <div class="card"><div class="row sb"><h2>Step 1: Select Subjects</h2><button class="btn s n g" style="background:none;color:var(--g2)" onclick="selAll()">Select All</button></div>
+ <p class="m" style="margin:10px 0">Use the box to give a range (1-50) or a count (50).</p>
+ ${subjects().map(x=>`<div class="card row" style="margin:8px 0;border-color:${s.sel[x].on?'var(--g)':'var(--bd)'}"><label class="cb n" style="margin:0"><input type="checkbox" ${s.sel[x].on?'checked':''} onchange="S.st.sel['${e(x)}'].on=this.checked;draw()"></label><div><b>${e(x)}</b><div class="m">${S.bank.filter(q=>q.subject==x).length} MCQs</div></div><input type="text" placeholder="Range / Count" value="${e(s.sel[x].v)}" onchange="S.st.sel['${e(x)}'].v=this.value;draw()"></div>`).join('')}</div>
+ <div class="card"><h2>Step 2: Test Format & Scoring Rules</h2>
+ <p class="m" style="margin:14px 0 6px">Test Title</p><input type="text" value="${e(s.title)}" placeholder="e.g. page 4 and 5" onchange="S.st.title=this.value">
+ <p class="m" style="margin:14px 0 6px">Examination Mode</p>
+ ${[['strict','Strict Exam Simulator','Timed test, negative marking, answers and solutions revealed ONLY upon final submission.'],['study','Study & Practice Drill','Instant right/wrong feedback and rationale after each click.']].map(m=>`<div class="opt ${s.mode==m[0]?'sel':''}" onclick="S.st.mode='${m[0]}';draw()" style="display:block"><b>${m[1]}</b><div class="m" style="margin-top:4px">${m[2]}</div></div>`).join('')}
+ <p class="m" style="margin:14px 0 6px">Difficulty Filter</p>${['All','Easy','Medium','Hard'].map(d=>`<span class="chip ${s.diff==d?'on':''}" onclick="S.st.diff='${d}';draw()">${d}</span>`).join('')}
+ <p class="m" style="margin:14px 0 6px">Negative Marking</p>${[[0,'None (0.00)'],[.25,'Standard 0.25 (PPSC/FPSC)'],[.33,'One Third 0.33'],[.5,'Half 0.50']].map(n=>`<div class="opt ${s.neg==n[0]?'sel':''}" onclick="S.st.neg=${n[0]};draw()">${n[1]}</div>`).join('')}
+ <div class="row sb" style="margin:14px 0 6px"><span class="m">Passing Percentage (<span id="pp">${s.pass}</span>%)</span><span style="color:var(--b);font-size:13px">Standard Pass</span></div>
+ <input type="range" min="33" max="60" value="${Math.max(33,s.pass)}" oninput="S.st.pass=+this.value;$('#pp').textContent=this.value;$('#sp').textContent=this.value+'%'"><div class="row sb m" style="font-size:13px"><span>33% (Pass)</span><span style="text-align:right">60% (Competitive)</span></div>
+ ${[['zero','Zero Repeats (Unseen First)'],['shuf','Shuffle Questions'],['rnd','Randomize Options']].map(c=>`<label class="cb"><input type="checkbox" ${s[c[0]]?'checked':''} onchange="S.st.${c[0]}=this.checked"> ${c[1]}</label>`).join('')}</div>
+ <div class="card" style="border-color:#14604a"><h2>▶ Launch Summary</h2><p class="m">Review test parameters before starting.</p>
+ <div class="row sb" style="margin-top:14px"><div><b>Number of Questions</b><div class="m">Custom count</div></div><input type="number" id="nn" min="1" max="${mx}" value="${s.n}" style="width:110px;text-align:center;color:var(--g2);font-weight:700" onchange="setN(this.value)"></div>
+ <input type="range" id="nr" min="1" max="${mx}" value="${s.n}" oninput="setN(this.value,1)"><div class="row sb m" style="font-size:13px"><span>1</span><span style="text-align:right">Max (${P.length})</span></div>
+ <div class="row sb" style="margin-top:14px"><div><b>Time in Mock (Minutes)</b><div class="m">Custom time</div></div><input type="number" id="tt" min="1" max="180" value="${s.t}" style="width:110px;text-align:center;color:var(--g2);font-weight:700" onchange="S.st.t=Math.max(1,Math.min(180,+this.value||1));$('#tr').value=S.st.t"></div>
+ <input type="range" id="tr" min="1" max="180" value="${s.t}" oninput="S.st.t=+this.value;$('#tt').value=this.value"><div class="row sb m" style="font-size:13px"><span>1 min</span><span style="text-align:right">180 mins</span></div>
+ <div class="sum" style="margin:14px 0;border-top:1px solid var(--bd);padding-top:10px"><div>Mode:<b>${s.mode=='strict'?'Strict Exam Simulator':'Study & Practice Drill'}</b></div><div>Subjects Included:<b>${subjects().filter(x=>s.sel[x].on).map(e).join(', ')||'—'}</b></div><div>Negative Marking:<b>${s.neg?s.neg.toFixed(2):'None (0.00)'}</b></div><div>Pass Criteria:<b id="sp">${s.pass}%</b></div></div>
+ <button class="btn g" style="width:100%;padding:16px" onclick="start()">▶ Start Mock Test</button></div>`}
+function setN(v,fromRange){const mx=pool().length||1;v=Math.max(1,Math.min(mx,+v||1));S.st.n=v;S.st.t=Math.min(180,v*2);$('#nn').value=v;$('#nr').value=v;$('#tt').value=S.st.t;$('#tr').value=S.st.t}
+function selAll(){const all=subjects().every(x=>S.st.sel[x].on);subjects().forEach(x=>S.st.sel[x].on=!all);draw()}
+function drill(x){ensureSel();subjects().forEach(y=>S.st.sel[y].on=y==x);S.st.n=Math.min(S.bank.filter(q=>q.subject==x).length,S.st.n);draw()}
+function s_full(){const P=pool();S.st.n=P.length;S.st.t=Math.min(180,P.length*2);start()}
+function blitz(){const P=shuf(S.bank).slice(0,10);launch(P,{title:'10-MCQ Rapid Blitz',mode:'strict',neg:0,pass:33,mins:10,rnd:true})}
+function start(){let P=pool();if(!P.length)return alert('Select at least one subject with questions.');const s=S.st;
+ if(s.zero){const seen=new Set(S.hist.flatMap(h=>h.ids));P=[...shuf(P.filter(q=>!seen.has(q.id))),...shuf(P.filter(q=>seen.has(q.id)))]}else if(s.shuf)P=shuf(P);
+ launch(P.slice(0,s.n),{title:s.title||'Mock Test',mode:s.mode,neg:s.neg,pass:s.pass,mins:s.t,rnd:s.rnd})}
+/* ---------- QUIZ ---------- */
+function launch(list,cfg){if(!list.length)return alert('No questions to practice.');
+ const qs=list.map(q=>{let o=q.options.map((t,i)=>({t,c:i==q.correct_index}));if(cfg.rnd)o=shuf(o);return{id:q.id,o}});
+ S.res=null;S.tab='quiz';S.qz={qs,ans:qs.map(()=>null),i:0,cfg,end:Date.now()+cfg.mins*60000,tm:null};
+ S.qz.tm=setInterval(tick,500);draw()}
+function tick(){const z=S.qz;if(!z)return;const l=Math.max(0,Math.round((z.end-Date.now())/1000));const el=$('#tm');if(el)el.textContent=String(l/60|0).padStart(2,'0')+':'+String(l%60).padStart(2,'0');if(l<=0)finish()}
+const L='ABCD';
+function vQuiz(){const z=S.qz,q=byId(z.qs[z.i].id),o=z.qs[z.i].o,a=z.ans[z.i],study=z.cfg.mode=='study',lock=study&&a!=null,sd=S.saved.includes(q.id);
+ const ansN=z.ans.filter(x=>x!=null).length;
+ return `<div class="card row sb"><div><b style="color:var(--g2)">${study?'STUDY & PRACTICE':'STRICT EXAM SIMULATOR'}</b><div class="m">Question <b style="color:var(--tx)">${z.i+1}</b> of <b style="color:var(--tx)">${z.qs.length}</b></div></div><div class="row n"><span class="pill" style="color:var(--o);border-color:var(--bd);background:var(--in)" id="tm">--:--</span><button class="btn s r" onclick="if(confirm('Quit this test?'))go('studio')">Quit</button></div></div>
+ <div class="bar"><div style="width:${(z.i+1)/z.qs.length*100}%"></div></div>
+ <div class="card"><div class="row sb"><div><span class="tag t-s">${e(q.subject)}</span><span class="tag t-${q.difficulty}">${e(q.difficulty)}</span></div><button class="btn s n" style="color:${sd?'var(--o)':'var(--mu)'}" onclick="toggleSave('${q.id}');draw()">${sd?'🔖 Saved':'🔖 Save'}</button></div>
+ <h2 style="margin:14px 0">${e(q.question)}</h2>
+ ${o.map((x,i)=>{let c='';if(lock)c=x.c?'ok':(a==i?'bad':'');else if(a==i)c='sel';return`<button class="opt ${c}" onclick="pick(${i})"><i>${L[i]}</i>${e(x.t)}</button>`}).join('')}
+ ${lock?`<div class="exp">${o[a].c?'✅ Correct!':'❌ Incorrect.'} Correct answer: <b>${e(o.find(x=>x.c).t)}</b><br>${e(q.explanation)}</div>`:''}</div>
+ <div class="row"><button class="btn" ${z.i?'':'disabled'} onclick="S.qz.i--;draw()">← Previous</button><button class="btn" onclick="clr()" ${lock?'disabled':''}>Clear Choice</button><button class="btn g" ${z.i<z.qs.length-1?'':'disabled'} onclick="S.qz.i++;draw()">Next →</button></div>
+ <div class="card"><div class="row sb"><b class="m">Question Palette</b><b style="color:var(--g2);font-size:14px">${ansN} / ${z.qs.length} Answered</b></div><div class="pal" style="margin-top:12px">${z.qs.map((x,i)=>`<button class="${z.ans[i]!=null?'a':''} ${i==z.i?'cur':''} ${S.saved.includes(x.id)?'sv':''}" onclick="S.qz.i=${i};draw()">${i+1}</button>`).join('')}</div>
+ <button class="btn g" style="width:100%;margin-top:14px;padding:16px" onclick="if(confirm('Submit and view results?'))finish()">Submit & View Results</button></div>`}
+function pick(i){const z=S.qz;if(z.cfg.mode=='study'&&z.ans[z.i]!=null)return;z.ans[z.i]=i;draw()}
+function clr(){S.qz.ans[S.qz.i]=null;draw()}
+function toggleSave(id){const i=S.saved.indexOf(id);i<0?S.saved.push(id):S.saved.splice(i,1);save()}
+function finish(){const z=S.qz;if(!z)return;clearInterval(z.tm);let ok=0,bad=0,skip=0;const wrong=[],skipped=[];
+ z.qs.forEach((x,i)=>{const a=z.ans[i];if(a==null){skip++;skipped.push(x.id)}else if(x.o[a].c)ok++;else{bad++;wrong.push(x.id)}});
+ const score=ok-bad*z.cfg.neg,pct=Math.max(0,score/z.qs.length*100),pass=pct>=z.cfg.pass;
+ const h={title:z.cfg.title,mode:z.cfg.mode,date:new Date().toLocaleString('sv').slice(0,16),pct:+pct.toFixed(1),pass,ids:z.qs.map(x=>x.id),cfg:z.cfg};
+ S.hist.unshift(h);S.hist=S.hist.slice(0,100);save();
+ S.res={z,ok,bad,skip,score,pct,pass,wrong,skipped};S.qz=null;draw()}
+function vRes(){const r=S.res,z=r.z,inc=[...r.wrong,...r.skipped];
+ return `<h1>Results</h1><div class="card"><div class="sc" style="color:${r.pass?'var(--g2)':'var(--r)'}">${r.pct.toFixed(1)}%</div><p style="text-align:center"><span class="pill ${r.pass?'pass':'fail'}">${r.pass?'PASS':'FAIL'}</span></p>
+ <div class="stats" style="margin-top:14px"><div><b style="color:var(--g2)">${r.ok}</b>Correct</div><div><b style="color:var(--r)">${r.bad}</b>Wrong</div><div><b>${r.skip}</b>Skipped</div><div><b>${r.score.toFixed(2)}</b>Score</div></div></div>
+ <div class="card"><h2>Practice more</h2><p class="m" style="margin:6px 0 12px">Retry the questions you missed, or practise your saved MCQs.</p>
+ <button class="btn o" style="width:100%;margin-bottom:10px" ${inc.length?'':'disabled'} onclick="reIncorrect()">🔁 Re-attempt Incorrect MCQs (${inc.length})</button>
+ <button class="btn g" style="width:100%;margin-bottom:10px" ${S.saved.length?'':'disabled'} onclick="practiceSaved()">🔖 Practice Saved MCQs (${S.saved.length})</button>
+ <button class="btn" style="width:100%" onclick="go('studio')">Back to Test Studio</button></div>
+ <h2 style="margin:18px 0 6px">Review</h2>${z.qs.map((x,i)=>{const q=byId(x.id),a=z.ans[i],c=x.o.findIndex(y=>y.c);if(!q)return'';return`<div class="card"><div class="row sb"><b class="m">Q${i+1}</b><span class="pill ${a==null?'':(a==c?'pass':'fail')}" style="font-size:12px">${a==null?'Skipped':(a==c?'Correct':'Wrong')}</span><button class="btn s n" style="color:${S.saved.includes(q.id)?'var(--o)':'var(--mu)'}" onclick="toggleSave('${q.id}');draw()">🔖 ${S.saved.includes(q.id)?'Saved':'Save'}</button></div><b style="display:block;margin:10px 0">${e(q.question)}</b>${x.o.map((y,j)=>`<div class="opt ${y.c?'ok':(a==j?'bad':'')}" style="cursor:default"><i>${L[j]}</i>${e(y.t)}</div>`).join('')}<div class="exp">${e(q.explanation)}</div></div>`}).join('')}`}
+function reIncorrect(){const r=S.res,ids=[...r.wrong,...r.skipped],l=ids.map(byId).filter(Boolean);launch(l,{title:'Re-attempt: '+r.z.cfg.title,mode:'study',neg:0,pass:33,mins:Math.max(1,l.length*2),rnd:true})}
+function practiceSaved(){const l=S.saved.map(byId).filter(Boolean);launch(shuf(l),{title:'Saved MCQs Practice',mode:'study',neg:0,pass:33,mins:Math.max(1,l.length*2),rnd:true})}
+/* ---------- BANK ---------- */
+function qCard(q,act){const sd=S.saved.includes(q.id);return`<div class="card"><div class="row sb"><div><span class="tag t-s">${e(q.subject)}</span><span class="tag t-${q.difficulty}">${e(q.difficulty)}</span></div><div class="row n" style="gap:8px"><button class="btn s n" style="color:${sd?'var(--o)':'var(--mu)'}" onclick="toggleSave('${q.id}');draw()">🔖</button>${act}</div></div><b style="display:block;margin:12px 0">${e(q.question)}</b>${q.options.map((o,i)=>`<div style="margin:6px 0;color:${i==q.correct_index?'var(--g2)':'var(--mu)'};font-size:14px">${i==q.correct_index?'✓ ':''}${L[i]}. ${e(o)}</div>`).join('')}<div class="exp">💡 ${e(q.explanation)}</div></div>`}
+function vBank(){const t=S.q.toLowerCase(),l=S.bank.filter(q=>(S.qs=='All'||q.subject==S.qs)&&(S.qd=='All'||q.difficulty==S.qd)&&(!t||(q.question+q.options.join(' ')+q.subject).toLowerCase().includes(t)));
+ return`<div class="row sb"><h1>Question Bank</h1><button class="btn g n" onclick="addQ()">+ Add MCQ</button></div>
+ <input type="text" id="sq" placeholder="🔍 Search question text, options, subject..." value="${e(S.q)}" oninput="S.q=this.value;bankList()">
+ <div style="margin-top:10px">${['All',...subjects()].map(x=>`<span class="chip ${S.qs==x?'on':''}" onclick="S.qs='${e(x)}';draw()">${x=='All'?'All Subjects':e(x)}</span>`).join('')}${['All','Easy','Medium','Hard'].map(x=>`<span class="chip ${S.qd==x?'on':''}" onclick="S.qd='${x}';draw()">${x=='All'?'All Difficulties':x}</span>`).join('')}</div>
+ ${subjects().length?`<div class="card" style="padding:12px"><b class="m">Manage subjects</b>${subjects().map((x,i)=>`<div class="row sb" style="margin-top:8px"><span>${e(x)} <span class="m">(${S.bank.filter(q=>q.subject==x).length} MCQs)</span></span><button class="btn s n r" onclick="delSubject(${i})">🗑 Delete subject</button></div>`).join('')}</div>`:''}
+ <p class="m" style="margin:10px 0" id="cnt">${l.length} of ${S.bank.length} MCQs shown</p><div id="bl">${l.map(q=>qCard(q,`<button class="btn s n" onclick="editQ('${q.id}')">Edit</button><button class="btn s n r" onclick="delQ('${q.id}')">Delete</button>`)).join('')}</div>`}
+function bankList(){const f=$('#sq');const p=f.selectionStart;draw();const n=$('#sq');n.focus();n.setSelectionRange(p,p)}
+function addQ(){const s=prompt('Subject?',S.qs!='All'?S.qs:'Pak Studies');if(!s)return;const q=prompt('Question?');if(!q)return;const o=[0,1,2,3].map(i=>prompt('Option '+L[i]+'?'));if(o.some(x=>!x))return;const c='ABCD'.indexOf((prompt('Correct option (A-D)?','A')||'A').toUpperCase());const d=prompt('Difficulty (Easy/Medium/Hard)?','Medium');
+ S.bank.push({id:uid(),subject:s,difficulty:['Easy','Medium','Hard'].includes(d)?d:'Medium',question:q,options:o,correct_index:c<0?0:c,explanation:prompt('Explanation?')||''});save();draw()}
+function editQ(id){const q=byId(id),t=prompt('Edit question text',q.question);if(t){q.question=t;const x=prompt('Edit explanation',q.explanation);if(x!=null)q.explanation=x;save();draw()}}
+function delQ(id){if(confirm('Delete this MCQ?')){S.bank=S.bank.filter(q=>q.id!=id);S.saved=S.saved.filter(x=>x!=id);save();draw()}}
+function delSubject(i){const s=subjects()[i],n=S.bank.filter(q=>q.subject==s).length;
+ if(!confirm(`Delete subject "${s}" and all ${n} of its MCQs? This cannot be undone.`))return;
+ const gone=new Set(S.bank.filter(q=>q.subject==s).map(q=>q.id));
+ S.bank=S.bank.filter(q=>q.subject!=s);S.saved=S.saved.filter(id=>!gone.has(id));
+ if(S.qs==s)S.qs='All';S.st.sel=null;save();draw()}
+/* ---------- SAVED ---------- */
+function vSaved(){const l=S.saved.map(byId).filter(Boolean);
+ return`<h1>Saved MCQs</h1><p class="m">Questions you bookmarked during quizzes.</p><div class="row" style="margin:14px 0"><button class="btn g" ${l.length?'':'disabled'} onclick="practiceSaved()">▶ Practice Saved (${l.length})</button><button class="btn r" ${l.length?'':'disabled'} onclick="if(confirm('Remove all saved?')){S.saved=[];save();draw()}">Clear all</button></div>
+ ${l.length?l.map(q=>qCard(q,'')).join(''):'<div class="card m" style="text-align:center">Nothing saved yet. Tap 🔖 Save on any question during a quiz.</div>'}`}
+/* ---------- UPLOAD ---------- */
+function vUpload(){const sample=JSON.stringify([{subject:'Pakistan Studies',difficulty:'Medium',question:'Who presented the Lahore Resolution?',options:['Allama Iqbal','A.K. Fazlul Huq','Liaquat Ali Khan','M.A. Jinnah'],correct_index:1,explanation:'A.K. Fazlul Huq moved the resolution in 1940.'}],null,2);window._s=sample;
+ return`<h1>Upload Center</h1><p class="m">Import a question bank from a JSON or CSV file.</p><div class="card"><h2>Import Questions</h2><p class="m" style="margin:10px 0">JSON: a list of objects with subject, difficulty, question, options (list of 4), correct_index, explanation.<br>CSV: columns subject, difficulty, question, option_a, option_b, option_c, option_d, correct_index, explanation.</p>
+ <button class="btn g" style="width:100%;padding:16px" onclick="$('#file').click()">⬆ Choose File to Upload…</button><div class="row" style="margin-top:10px"><button class="btn" onclick="pasteJ()">&lt;&gt; Paste JSON Text</button><button class="btn" style="color:var(--g2)" onclick="addBank(SAMPLE.map(r=>mk('Pak Studies',r)))">Load Sample Pack</button></div></div>
+ <div class="card"><h2>Export Questions</h2><p class="m" style="margin:10px 0">Save the entire question bank to a single JSON file you can back up, share, or re-import.</p><div class="row"><button class="btn g" onclick="exportJ()">⤓ Export All Subjects (JSON)</button><button class="btn n" style="flex:none" onclick="navigator.clipboard.writeText(expStr()).then(()=>alert('Copied'))">⧉</button></div></div>
+ <div class="card"><div class="row sb"><h2>Sample JSON Template</h2><button class="btn s n" onclick="navigator.clipboard.writeText(window._s).then(()=>alert('Copied'))">Copy</button></div><pre style="background:var(--in);border-radius:14px;padding:12px;margin-top:10px;overflow:auto;font-size:12px;color:#cbd5e1">${e(sample)}</pre></div>`}
+const expStr=()=>JSON.stringify(S.bank.map(({id,...r})=>r),null,2);
+function exportJ(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([expStr()],{type:'application/json'}));a.download='mcq-bank.json';a.click()}
+function pasteJ(){const t=prompt('Paste JSON here');if(t)importText(t,'json')}
+function csv(t){const rows=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}else if(ch=='"')q=true;else if(ch==','){r.push(c);c=''}else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[i+1]=='\n')i++;r.push(c);c='';rows.push(r);r=[]}else c+=ch}if(c||r.length){r.push(c);rows.push(r)}return rows.filter(x=>x.join('').trim())}
+function importText(t,kind){try{let l;if(kind=='csv'){const rows=csv(t),h=rows.shift().map(x=>x.trim().toLowerCase());l=rows.map(r=>{const g=k=>r[h.indexOf(k)];return{subject:g('subject'),difficulty:g('difficulty'),question:g('question'),options:['option_a','option_b','option_c','option_d'].map(g),correct_index:+g('correct_index'),explanation:g('explanation')}})}else l=JSON.parse(t);
+ l=l.filter(q=>q&&q.question&&Array.isArray(q.options)&&q.options.length>=2).map(q=>({id:uid(),subject:q.subject||'General',difficulty:['Easy','Medium','Hard'].includes(q.difficulty)?q.difficulty:'Medium',question:q.question,options:q.options.slice(0,4),correct_index:Math.max(0,Math.min(3,+q.correct_index||0)),explanation:q.explanation||''}));addBank(l)}catch(x){alert('Could not read that file: '+x.message)}}
+function addBank(l){if(!l.length)return alert('No valid questions found.');S.bank=S.bank.concat(l);S.st.sel=null;save();alert(l.length+' MCQs added.');go('bank')}
+$('#file').onchange=ev=>{const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>importText(r.result,/\.csv$/i.test(f.name)?'csv':'json');r.readAsText(f);ev.target.value=''};
+/* ---------- ANALYTICS ---------- */
+function vStats(){const h=S.hist,n=h.length,p=h.filter(x=>x.pass).length,avg=n?h.reduce((a,x)=>a+x.pct,0)/n:0,best=n?Math.max(...h.map(x=>x.pct)):0;
+ return`<div class="row sb"><h1>Analytics</h1><button class="btn n" onclick="if(confirm('Clear all history?')){S.hist=[];save();draw()}">🗑</button></div><p class="m" style="margin-bottom:14px">Your test history and performance trends.</p>
+ <div class="stats"><div><b style="color:var(--b)">${n}</b>Tests Taken</div><div><b style="color:var(--g2)">${n?Math.round(p/n*100):0}%</b>Pass Rate</div><div><b style="color:var(--g2)">${avg.toFixed(1)}%</b>Avg Score</div><div><b style="color:var(--o)">${best}%</b>Best Score</div></div>
+ <div class="card"><h2>🕒 Recent Attempts</h2>${n?h.slice(0,30).map((x,i)=>`<div class="card row sb" style="margin:10px 0;padding:12px"><div style="flex:2"><b>${e(x.title)}</b><div class="m" style="font-size:13px">${x.mode=='study'?'Study & Practice Drill':'Strict Exam'} • ${x.date}</div></div><button class="btn s n" style="color:var(--g2);background:none;border:0" onclick="retake(${i})">↻ Retake</button><span class="pill n ${x.pass?'pass':'fail'}" style="flex:none">${x.pass?'PASS':'FAIL'} ${x.pct}%</span></div>`).join(''):'<p class="m" style="margin-top:10px">No attempts yet. Take a test to see it here.</p>'}</div>`}
+function retake(i){const x=S.hist[i],l=x.ids.map(byId).filter(Boolean);launch(l,{...x.cfg,title:x.title})}
+draw();
+</script>
+</body>
+</html>
